@@ -9,25 +9,30 @@ class View {
     this.addTodoForm.onClick((title, description) =>
       this.addTodo(title, description)
     );
-  };
+  }
 
   setModel(model) {
     this.model = model;
-  };
+  }
+
+  render() {
+    const todos = this.model.getTodos();
+    todos.forEach((todo) => this.createRow(todo));
+  }
 
   addTodo(title, description) {
     const todo = this.model.addTodo(title, description);
     this.createRow(todo);
-  };
+  }
 
   toggleCompleted(id) {
     this.model.toggleCompleted(id);
-  };
+  }
 
   removeTodo(id) {
     this.model.removeTodo(id);
     document.getElementById(id).remove();
-  };
+  }
 
   createRow(todo) {
     const row = table.insertRow();
@@ -46,7 +51,7 @@ class View {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = todo.completed;
-    checkbox.onclick= ()=> this.toggleCompleted(todo.id);
+    checkbox.onclick = () => this.toggleCompleted(todo.id);
     row.children[2].appendChild(checkbox);
 
     const removeBtn = document.createElement("button");
@@ -57,7 +62,7 @@ class View {
     };
 
     row.children[3].appendChild(removeBtn);
-  };
-};
+  }
+}
 
 export default View;

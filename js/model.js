@@ -22,7 +22,7 @@ class Model {
   }
 
   getTodos() {
-    return this.todos;
+    return this.todos.map((todo) => ({ ...todo }));
   }
 
   addTodo(title, description) {
@@ -55,7 +55,7 @@ class Model {
     this.save();
   }
 
-  editTodo (id, values){
+  editTodo(id, values) {
     const index = this.findTodo(id);
     Object.assign(this.todos[index], values);
     this.save();
